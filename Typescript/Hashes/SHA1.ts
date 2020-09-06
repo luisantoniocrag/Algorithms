@@ -12,9 +12,13 @@ const CHAR_SIZE: number = 8;
  *  @Example
  *  pad("10011", 8); // "00010011"
  */
-function pad(str: string, bits: number): string {
+interface BinHex {
+    (string: string, bits: number): string
+}
+
+const pad: BinHex = function(str, bit) {
     let res = str;
-    while (res.length % bits !== 0) {
+    while (res.length % bit !== 0) {
         res = '0' + res;
     }
     return res;
@@ -25,7 +29,11 @@ function pad(str: string, bits: number): string {
  * @example
  * chunkify("this is a test", 2); // ["th", "is", " i", "s ", "a ", "te", "st"]
  */
-function chunkify(str: string, size: number): string[] {
+interface Chunks {
+    (string: string, sizeValue: number): string[]
+}
+
+const chunkify: Chunks = function (str, size) {
     const chunks = [];
     for (let i = 0; i < str.length; i += size) {
         chunks.push(str.slice(i, i + size))   
@@ -42,7 +50,11 @@ function chunkify(str: string, size: number): string[] {
  * rotateLeft("1011", 3); // "1101"
  */
 
-function rotateLeft(bits: string, turns: number): string {
+interface RotateBits {
+    (stringBits: string, numberOfTurns: number): string
+}
+
+const rotateLeft: RotateBits = function(bits, turns) {
     return bits.substr(turns) + bits.substr(0, turns);
 }
 
